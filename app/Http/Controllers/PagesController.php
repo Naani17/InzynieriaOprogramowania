@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
@@ -56,10 +57,13 @@ class PagesController extends Controller
 
     public function yours()
     {
+      
+        $user = Auth::user()->id;
 
+       $videos = DB::table('videos')->where('user_id',$user)->latest()->get();
             if(Auth::check())
             {
-                return view('pages.yours');
+                return view('pages.yours')->with('videos',$videos);
             }
             {
                 Session::flash('admin_logged','Nie jestes zalogowany !');

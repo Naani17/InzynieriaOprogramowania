@@ -51,7 +51,7 @@
                     <li><a href="/about">Wymagania projektu</a></li>
 
                     @if(Auth::check())
-                        <li><a href="/yours">Twoje oferty</a></li>
+                        <li><a href="/yours">Twoje Filmy</a></li>
                     @endif
                         
                     @if(Auth::id()==1)
