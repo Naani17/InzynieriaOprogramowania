@@ -22,6 +22,12 @@
 	</div>
 @endif
 
+@if(Session::has('video_created'))
+	<div class="alert alert-success card">
+		{{ Session::get('video_created') }}
+	</div>
+@endif
+
 @if(Auth::check())
 	<div class="videos-header card powitanie"> 
 		Witaj : {!! Auth::user()->name !!}

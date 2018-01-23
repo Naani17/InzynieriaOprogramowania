@@ -7,7 +7,9 @@ use Request;
 use App\Http\Requests;
 use App\Http\Requests\CreateVideoRequest;
 use App\Http\Controllers\Controller;
-
+use App\Video;
+use Auth;
+use Session;
 
 class VideosController extends Controller
 {
@@ -44,7 +46,17 @@ class VideosController extends Controller
         return view('videos.create');
     }
 
+    /**
+     * Zapisujemy film do bazy
+     */
+    public function store(CreateVideoRequest $request)
+    {
+        $video = new Video($request->all());
+        Auth::user()->videos()->save($video);
 
+        Session::flash('video_created','Twój film został zapisany');
+        return redirect('videos');
+    }
 
 
 
