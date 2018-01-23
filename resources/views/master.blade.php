@@ -50,13 +50,25 @@
                     <li><a href="/videos">Filmy</a></li>
                     <li><a href="/contact">Kontakt</a></li>
                     <li><a href="/about">Wymagania projektu</a></li>
+
+                    @if(Auth::check())
+                        <li><a href="/yours">Twoje oferty</a></li>
+                    @endif
+                        
+                    @if(Auth::id()==1)
+                        <li><a href="/users">Zarzadzanie uzytkownikami</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                        <li><a href="/login">Zaloguj</a></li>
-                        <li><a href="/register">Rejestracja</a></li>
+                        @if(Auth::check())
+                            <li><a href="/logout">Wyloguj</a></li>
+                        @else
+                            <li><a href="/login">Zaloguj</a></li>
+                            <li><a href="/register">Rejestracja</a></li>
+                        @endif
                 </ul>
             </div>
         </div>
