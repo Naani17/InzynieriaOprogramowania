@@ -88,5 +88,17 @@ class VideosController extends Controller
     }
 
 
+     /**
+     * Aktualizacja filmu
+     */
+    public function update($id, CreateVideoRequest $request)
+    {
+        $video = Video::findOrFail($id);
+        $video->update($request->all());
+        Session::flash('video_updated','Twoje ogłoszenie zostało zaktualizowane !');
+        return redirect('videos');
+    }
+
+
 
 }

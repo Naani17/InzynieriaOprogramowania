@@ -9,11 +9,19 @@
 		{{ Session::get('logout') }}
 	</div>
 @endif
+
 @if(Session::has('not_admin'))
 	<div class="alert alert-danger card">
 		{{ Session::get('not_admin') }}
 	</div>
 @endif
+
+@if(Session::has('video_updated'))
+	<div class="alert alert-success card">
+		{{ Session::get('video_updated') }}
+	</div>
+@endif
+
 @if(Session::has('admin_logged'))
 	<div class="alert alert-danger card">
 		{{ Session::get('admin_logged') }}
@@ -28,14 +36,16 @@
 	</div>
 @endif
 
+
+
+
 @if(Auth::check())
 	<div class="videos-header card powitanie"> 
 		Witaj : {!! Auth::user()->name !!}
 
-	    <a style="float:right;margin-right:50px;margin-top:-10px;"  href="/videos/create" class="btn btn-primary btn-lg">
+	    <a style="float:right;margin-right:50px;"  href="/videos/create" class="btn btn-primary btn-lg">
 	        Dodaj nowy film !
 	    </a>
-
 	@if(Auth::id()==1)
 		<p>Posiadasz uprawnienia Administratora</p>
 	@endif
