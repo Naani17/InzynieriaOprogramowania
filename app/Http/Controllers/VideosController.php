@@ -62,5 +62,31 @@ class VideosController extends Controller
     }
 
 
+    /**
+     * Formularz edycji filmu
+     */
+    public function edit($id)
+    {
+        
+        $video = Video::findOrFail($id);
+        if(Auth::check())
+        {
+            if (($video->user->id) == (Auth::user()->id) || ($video->user->id) == ((Auth::user()->id) == 1))
+        {
+             return view('videos.edit')->with('video',$video);
+        }
+        else
+        {
+           Session::flash('video_isnotyour','To ogłoszenie nie jest Twoje ! Nie możesz go edytować.');
+           return view('videos.show')->with('video',$video);
+        }
+    }else
+    {
+        Session::flash('user_logged','Nie jesteś zalogowanym użytkownikiem ! Nie możesz edytować filmów.');
+        return view('videos.show')->with('video',$video);
+    }
+    }
+
+
 
 }
