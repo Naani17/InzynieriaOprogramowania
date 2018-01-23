@@ -32,6 +32,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/yours','PagesController@yours');
 	Route::get('/users','PagesController@manage');
 
+	Route::get('/videos/delete{id}','VideosController@delete');
 	Route::resource('videos','VideosController');
     Route::auth();
 });

@@ -49,6 +49,9 @@
                     <a href="{{ action('VideosController@edit', $video->id) }}" class="btn btn-primary btn-lg">
                         Edytuj Video
                     </a>
+                    <a style="margin-left:150px;" href="{{action('VideosController@delete', $video->id)}}" class="btn btn-primary btn-lg">
+                        Usuń Ogłoszenie
+                    </a>
                    
                 </div>
             </div>

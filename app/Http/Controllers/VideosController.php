@@ -99,6 +99,33 @@ class VideosController extends Controller
         return redirect('videos');
     }
 
+      /**
+     * Usuwanie filmu
+     */
+
+    public function delete($id)
+    {
+        $video = Video::findOrFail($id);
+
+        if(Auth::check())
+        {
+           if (($video->user->email) == (Auth::user()->email) || ($video->user->id) == ((Auth::user()->id) == 1))
+        {
+            $video->destroy($id);
+            Session::flash('video_isyour','Twoje ogłoszenie zostało usunięte !');
+            return redirect('videos');
+        }else
+            {
+               Session::flash('video_is_not_your','To ogłoszenie nie jest Twoje ! Nie możesz go usunac.');
+               return view('videos.show')->with('video',$video);
+            } 
+        }else
+            {
+                Session::flash('user_logged','Nie jesteś zalogowanym użytkownikiem ! Nie możesz usuwać filmów.');
+                return view('videos.show')->with('video',$video);
+            }   
+    }
+
 
 
 }

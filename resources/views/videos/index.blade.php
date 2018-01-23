@@ -10,6 +10,12 @@
 	</div>
 @endif
 
+@if(Session::has('video_isyour'))
+	<div class="alert alert-success card">
+		{{ Session::get('video_isyour') }}
+	</div>
+@endif
+
 @if(Session::has('not_admin'))
 	<div class="alert alert-danger card">
 		{{ Session::get('not_admin') }}
