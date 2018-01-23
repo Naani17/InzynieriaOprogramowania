@@ -39,7 +39,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/videos">
                     Inzynieria oprogramowania
                 </a>
             </div>
@@ -47,8 +47,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="">Start</a></li>
-                    <li><a href="articles.html">Filmy</a></li>
+                    <li><a href="/videos">Filmy</a></li>
                     <li><a href="/contact">Kontakt</a></li>
                     <li><a href="/about">Wymagania projektu</a></li>
                 </ul>
