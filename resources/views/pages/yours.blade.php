@@ -20,7 +20,7 @@
 	                <iframe class="embed-responsive-item" src="{{ $video->url }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
 	            </div>
 	            <div class="card-content">
-	                <a href="{{ url('/video',$video->id) }}">
+	                <a href="{{ url('/videos',$video->id) }}">
 	                    <h4>{{ $video->title }}</h4>
 	                </a>
 	                <p>{{ str_limit ($video->description,$limit=80) }}</p>
