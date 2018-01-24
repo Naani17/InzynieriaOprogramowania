@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Video;
 use Auth;
 use Session;
+use Illuminate\Support\Facades\Cookie;
 
 class VideosController extends Controller
 {
@@ -22,12 +23,17 @@ class VideosController extends Controller
     /**
      * Pobieramy liste filmow
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        $recentlyPropertiesCookie = Cookie::get('recent_properties');
+        $recentlyProperties = isset($recentlyPropertiesCookie) ? $recentlyPropertiesCookie : [];
 
         $videos = Video::latest()->get();
-        return view('videos.index')->with('videos', $videos);
+        return view('videos.index', [
+        'videos' => $videos,
+         'recentlyProperties' => Video::whereIn('id', $recentlyProperties)->orderBy('created_at', 'desc')->get()
+      ]);
+        
     }
 
     /**
@@ -36,6 +42,18 @@ class VideosController extends Controller
     public function show($id)
     {
         $video = Video::findOrFail($id);
+
+        $recentlyPropertiesCookie = Cookie::get('recent_properties');
+         $recentlyProperties = isset($recentlyPropertiesCookie) ? $recentlyPropertiesCookie : [];
+
+         if ( !in_array($video->id, $recentlyProperties) )
+            $recentlyProperties[] = $video->id;
+
+         if ( count($recentlyProperties) > 3 )
+            array_shift($recentlyProperties);
+
+         Cookie::queue('recent_properties', $recentlyProperties, '3');
+
 
         return view('videos.show')->with('video', $video);
     }
