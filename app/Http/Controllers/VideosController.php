@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateVideoRequest;
 use App\Http\Controllers\Controller;
 use App\Video;
+use App\User;
 use Auth;
 use Session;
 use Illuminate\Support\Facades\Cookie;
@@ -29,10 +30,23 @@ class VideosController extends Controller
         $recentlyProperties = isset($recentlyPropertiesCookie) ? $recentlyPropertiesCookie : [];
 
         $videos = Video::latest()->get();
-        return view('videos.index', [
+
+        if ((count($videos))>0)
+        {
+         return view('videos.index', [
         'videos' => $videos,
          'recentlyProperties' => Video::whereIn('id', $recentlyProperties)->orderBy('created_at', 'desc')->get()
-      ]);
+      ]); 
+        }
+        else
+        {
+           Session::flash('empty','Przepraszamy, ale aktualnie nie mamy zadnych filmow w bazie.');
+            return view('videos.index', [
+        'videos' => $videos,
+         'recentlyProperties' => Video::whereIn('id', $recentlyProperties)->orderBy('created_at', 'desc')->get()
+      ]); 
+        }
+       
         
     }
 
@@ -42,6 +56,12 @@ class VideosController extends Controller
     public function show($id)
     {
         $video = Video::findOrFail($id);
+
+        $filmy = Video::all();
+        $suma_filmow=count($filmy);
+
+        $uzytkownicy = User::all();
+        $suma_uzytkownikow = count($uzytkownicy);
 
         $recentlyPropertiesCookie = Cookie::get('recent_properties');
          $recentlyProperties = isset($recentlyPropertiesCookie) ? $recentlyPropertiesCookie : [];
@@ -55,7 +75,11 @@ class VideosController extends Controller
          Cookie::queue('recent_properties', $recentlyProperties, '3');
 
 
-        return view('videos.show')->with('video', $video);
+         return view('videos.show', [
+        'video' => $video,
+        'filmy'=>$suma_filmow,
+        'uzytkownicy'=>$suma_uzytkownikow         
+      ]);
     }
 
     /**

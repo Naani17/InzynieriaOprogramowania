@@ -79,18 +79,18 @@
         <!-- pojedynczy box -->
         <div class="card">
             <div class="right-col-box categories-box">
-                <h4>Popularne kategorie</h4>
+                <h4>Popularni wykonawcy</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <h5>Webdesign</h5>
+                        <h5>Quebonafide</h5>
                         <span>234 filmów</span>
                     </li>
                     <li class="list-group-item">
-                        <h5>JavaScript</h5>
+                        <h5>Paluch</h5>
                         <span>87 filmów</span>
                     </li>
                     <li class="list-group-item">
-                        <h5>Laravel</h5>
+                        <h5>Reto</h5>
                         <span>56 filmów</span>
                     </li>
                 </ul>
@@ -100,19 +100,13 @@
         <!-- pojedynczy box -->
         <div class="card">
             <div class="right-col-box">
-                <h4>Statystyki</h4>
+                <h4>Statystyki :</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <span class="badge">1342</span>Filmów
+                        <span class="badge">{{ $filmy }}</span>Filmów
                     </li>
                     <li class="list-group-item">
-                        <span class="badge">18</span>Kategorii
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">7800</span>Użytkowników
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">832</span>Komentarzy
+                        <span class="badge">{{ $uzytkownicy }}</span>Uzytkownikow
                     </li>
                 </ul>                            
             </div>

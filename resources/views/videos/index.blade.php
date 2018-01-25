@@ -42,6 +42,12 @@
 	</div>
 @endif
 
+@if(Session::has('empty'))
+	<div class="alert alert-warning card">
+		{{ Session::get('empty') }}
+	</div>
+@endif
+
 
 
 
