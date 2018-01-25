@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
+    protected $users;
+
+    public function __construct(User $users)
+    {
+        $this->users = $users;
+    }
+
+
     public function contact()
     {
     	return view('pages.contact');
@@ -29,7 +37,7 @@ class PagesController extends Controller
     public function manage()
     {
     	
-    	$users = User::all();
+    	$users = $this->users->all();
 
     	if(Auth::check())
         {	
