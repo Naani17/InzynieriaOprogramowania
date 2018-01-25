@@ -31,7 +31,9 @@
 	                 	<a href="{{action('PagesController@edit', $user->id)}}" class="btn btn-primary btn-md">
 	                        Edytuj Uzytkownika
 	                    </a>
-	                   
+	                    <a style="margin-left:25px;" href="{{action('PagesController@delete', $user->id)}}" class="btn btn-primary btn-md">
+	                        Usuń Uzytkownika
+	                    </a>
 	                </div>
 	
 

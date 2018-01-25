@@ -113,4 +113,18 @@ class PagesController extends Controller
         Session::flash('user_updated','Dane uzytkownika zostały zaktualizowane!');
         return redirect('users');
     }
+
+    /**
+         * Usuwanie uzytkownikow przez Admina
+         */
+
+
+    public function delete($id)
+        {
+            $users = $this->users->findOrFail($id);
+
+            $users->delete($id);
+            Session::flash('user_deleted','Uzytkownik został usunięty !');
+            return redirect('users');
+        }
 }
