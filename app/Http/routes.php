@@ -31,6 +31,8 @@ Route::get('/about', 'PagesController@about');
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/yours','PagesController@yours');
 	Route::get('/users','PagesController@manage');
+	Route::get('/users/edit{id}','PagesController@edit');
+	Route::post('/users/zaktualizuj{id}','PagesController@zaktualizuj');
 
 	Route::get('/videos/delete{id}','VideosController@delete');
 	Route::resource('videos','VideosController');

@@ -27,7 +27,12 @@
 	                <h5>E-mail :</h5>
 	                <p>{{$user->email}}</p>
 
-	                
+	                <div class="edit-button">
+	                 	<a href="{{action('PagesController@edit', $user->id)}}" class="btn btn-primary btn-md">
+	                        Edytuj Uzytkownika
+	                    </a>
+	                   
+	                </div>
 	
 
 	            </div>

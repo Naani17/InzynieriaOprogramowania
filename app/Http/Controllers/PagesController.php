@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Session;
+
 
 class PagesController extends Controller
 {
@@ -76,9 +79,38 @@ class PagesController extends Controller
             {
                 Session::flash('admin_logged','Nie jestes zalogowany !');
                 return redirect('videos');
-            }
+            }  
+    }
 
-        
-        
+     /**
+     * Edycja danych przez administratora
+     */
+
+    public function edit($id)
+        {
+             $user = $this->users->findOrFail($id);
+
+            if(Auth::id()==1)
+                {
+                   return view('pages.edit_users')->with('user',$user);  
+                }
+                else
+                {
+                    Session::flash('not_admin','Nie jestes administratorem !');
+                    return redirect('videos');
+                }
+        }
+
+
+     /**
+     * Aktualizacja danych oferty mieszkania
+     */
+
+    public function zaktualizuj($id, CreateUserRequest $request)
+    {
+        $users = $this->users->findOrFail($id);
+        $users->update($request->all());
+        Session::flash('user_updated','Dane uzytkownika zostały zaktualizowane!');
+        return redirect('users');
     }
 }
